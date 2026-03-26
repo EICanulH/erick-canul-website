@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Canul Hernández Erick Iván">
+<meta name="author" content="Rodríguez Ortiz Yael">
+
+<title>Modelos de Mortalidad – Erick Canul</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707710bb7a0eddacf54b96aa728de139.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-2ad43377c2721eee0d9aa3f1e2119c78.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-f69dd01e971a21a7fbf21548c79dab50.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+
+<script src="../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+</head><body class="nav-sidebar floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\decimalpoint
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\renewcommand{\and}{\\}
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Erick Canul</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../01-experiencia/index-experiencia.html"> 
+<span class="menu-text">Experiencia</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../02-universidad-trabajos/index-universidad-trabajos.html" aria-current="page"> 
+<span class="menu-text">Trabajos universitarios</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../02-universidad-trabajos/index-universidad-trabajos.html"> 
+<span class="menu-text">Trabajos universitarios</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../03-cursos/index-cursos.html"> 
+<span class="menu-text">Extracurricular</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../02-universidad-trabajos/matematicas-actuariales-1/Proyecto1/modelos-mortalidad.html">Modelos de Mortalidad</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../02-universidad-trabajos/index-universidad-trabajos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Trabajos universitarios</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../02-universidad-trabajos/metodos-cuantitativos-finanzas/var-cvar/var-cvar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VaR y cVaR de acciones y portafolios de inversión</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../02-universidad-trabajos/metodos-cuantitativos-finanzas/propuesta-inversion/propuesta-inversion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Propuesta de inversión</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../02-universidad-trabajos/demografia/analisis-demografico-chiapas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Análisis demográfico del estado de Chiapas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../02-universidad-trabajos/matematicas-actuariales-1/Proyecto1/modelos-mortalidad.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Modelos de Mortalidad</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#definiciones" id="toc-definiciones" class="nav-link active" data-scroll-target="#definiciones"><span class="header-section-number">1</span> Definiciones</a>
+  <ul>
+  <li><a href="#mortalidad-y-supervivencia" id="toc-mortalidad-y-supervivencia" class="nav-link" data-scroll-target="#mortalidad-y-supervivencia"><span class="header-section-number">1.1</span> Mortalidad y supervivencia</a></li>
+  <li><a href="#fuerza-de-mortalidad" id="toc-fuerza-de-mortalidad" class="nav-link" data-scroll-target="#fuerza-de-mortalidad"><span class="header-section-number">1.2</span> Fuerza de mortalidad</a></li>
+  <li><a href="#tablas-de-mortalidad" id="toc-tablas-de-mortalidad" class="nav-link" data-scroll-target="#tablas-de-mortalidad"><span class="header-section-number">1.3</span> Tablas de mortalidad</a></li>
+  </ul></li>
+  <li><a href="#ley-de-de-moivre-1729" id="toc-ley-de-de-moivre-1729" class="nav-link" data-scroll-target="#ley-de-de-moivre-1729"><span class="header-section-number">2</span> Ley de De Moivre (1729)</a></li>
+  <li><a href="#ley-de-gompertz" id="toc-ley-de-gompertz" class="nav-link" data-scroll-target="#ley-de-gompertz"><span class="header-section-number">3</span> Ley de Gompertz</a></li>
+  <li><a href="#ley-de-makeham" id="toc-ley-de-makeham" class="nav-link" data-scroll-target="#ley-de-makeham"><span class="header-section-number">4</span> Ley de Makeham</a></li>
+  <li><a href="#modelo-de-weibull" id="toc-modelo-de-weibull" class="nav-link" data-scroll-target="#modelo-de-weibull"><span class="header-section-number">5</span> Modelo de Weibull</a></li>
+  <li><a href="#modelo-de-pareto" id="toc-modelo-de-pareto" class="nav-link" data-scroll-target="#modelo-de-pareto"><span class="header-section-number">6</span> Modelo de Pareto</a></li>
+  <li><a href="#modelo-de-fuerza-de-mortalidad-constante" id="toc-modelo-de-fuerza-de-mortalidad-constante" class="nav-link" data-scroll-target="#modelo-de-fuerza-de-mortalidad-constante"><span class="header-section-number">7</span> Modelo de Fuerza de Mortalidad Constante</a></li>
+  <li><a href="#modelo-de-de-moivre-generalizado" id="toc-modelo-de-de-moivre-generalizado" class="nav-link" data-scroll-target="#modelo-de-de-moivre-generalizado"><span class="header-section-number">8</span> Modelo de De Moivre Generalizado</a></li>
+  <li><a href="#modelo-experiencia-mexicana-2000-de-la-cnsf" id="toc-modelo-experiencia-mexicana-2000-de-la-cnsf" class="nav-link" data-scroll-target="#modelo-experiencia-mexicana-2000-de-la-cnsf"><span class="header-section-number">9</span> Modelo Experiencia Mexicana 2000 de la CNSF</a></li>
+  <li><a href="#escribir-en-csv" id="toc-escribir-en-csv" class="nav-link" data-scroll-target="#escribir-en-csv"><span class="header-section-number">10</span> Escribir en CSV</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Modelos de Mortalidad</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Canul Hernández Erick Iván </p>
+             <p>Rodríguez Ortiz Yael </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="dv">101</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>(w <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="dv">1000000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="definiciones" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Definiciones</h1>
+<section id="mortalidad-y-supervivencia" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="mortalidad-y-supervivencia"><span class="header-section-number">1.1</span> Mortalidad y supervivencia</h2>
+<p>Supongamos que (<span class="math inline">\(x\)</span>) denota la edad de una persona. Vamos a modelar su tiempo futuro de vida mediante una variable aleatoria <span class="math inline">\(T_x = T(x)\)</span>, que representa el tiempo futuro de vida para una persona de edad (<span class="math inline">\(x\)</span>). <span class="math inline">\(\omega\)</span> es la edad terminal o edad máxima que vivirá la persona y la edad de muerte será <span class="math inline">\(x + T_x\)</span>.</p>
+<p>La función de distribución <span class="math inline">\(F_{T_x}(t)\)</span> representa la probabilidad de que la persona de edad (<span class="math inline">\(x\)</span>) muera en los próximos <span class="math inline">\(t\)</span> años:</p>
+<p><span class="math display">\[F_{T_x}(t) = F_x(t) = P(T_x \leq t).\]</span></p>
+<p>La función de sobrevivencia <span class="math inline">\(S_{T_x}(t)\)</span> representa la probabilidad de que la persona de edad (<span class="math inline">\(x\)</span>) viva al menos <span class="math inline">\(t\)</span> años:</p>
+<p><span class="math display">\[S_{T_x}(t) = S_x(t) = P(T_x &gt; t)\]</span></p>
+<p>Claramente <span class="math inline">\(F_x(t) = 1 - S_x(t)\)</span>. En notación actuarial tenemos:</p>
+<p><span class="math inline">\({}_tp_x\)</span>: Probabilidad de que una persona de edad (<span class="math inline">\(x\)</span>) sobreviva al menos <span class="math inline">\(t\)</span> años:</p>
+<p><span class="math display">\[{}_tp_x = P(T_x &gt; t) = S_x(t) = \frac{S_0(x+t)}{S_0(x)}\]</span> <span class="math inline">\({}_tq_x\)</span>: Probabilidad de que una persona de edad (<span class="math inline">\(x\)</span>) muera en los próximos <span class="math inline">\(t\)</span> años:</p>
+<p><span class="math display">\[{}_tq_x = P(T_x \leq t) = F_x(t) = \frac{F_0(x + t) - F_0(x)}{1 - F_0(x)}.\]</span></p>
+<p>Cuando <span class="math inline">\(t=1\)</span>, <span class="math inline">\({}_1q_x = q_x\)</span> y <span class="math inline">\({}_1p_x = p_x\)</span>.</p>
+<p><span class="math inline">\({}_{t|u}q_x\)</span>: Probabilidad de que una persona de edad (<span class="math inline">\(x\)</span>) muera entre edades (<span class="math inline">\(x+t\)</span>) y (<span class="math inline">\(x+t+u\)</span>):</p>
+<p><span class="math display">\[{}_{t|u}q_x = P(t \leq T_x &lt; t + u).\]</span></p>
+<p>Se prueba que</p>
+<p><span class="math display">\[_{t|u}q_x = {}_tp_x \cdot {}_uq_{x+t}\]</span></p>
+<p><span class="math display">\[_{t|u}q_x = {}_tp_x - {}_{t+u}p_x\]</span> <span class="math display">\[_{t|u}q_x = {}_{t+u}q_x - {}_tq_x\]</span></p>
+</section>
+<section id="fuerza-de-mortalidad" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="fuerza-de-mortalidad"><span class="header-section-number">1.2</span> Fuerza de mortalidad</h2>
+<p>LA fuerza de mortalidad para una persona de edad (<span class="math inline">\(x\)</span>) se denota como <span class="math inline">\(\mu_x\)</span> y se define como</p>
+<p><span class="math display">\[\mu_x = \lim_{dx \rightarrow 0^{+}} \frac{1}{dx}P(T_x &lt; dx)\]</span></p>
+<p>Se prueba que</p>
+<p><span class="math display">\[\mu_x = - \frac{S'_0(x)}{S_0(x)} = \frac{d}{dx}(-\ln(S_0(x))).\]</span></p>
+<p>Además,</p>
+<p><span class="math display">\[S_0(t) = \exp\left( -\int_0^t \mu_x\, dx \right)\]</span></p>
+<p><span class="math display">\[S_x(t) = \exp\left( -\int_0^t \mu_{x + s}\, ds \right)\]</span></p>
+<p>Finalmente:</p>
+<p><span class="math display">\[\mu_{x+t} = - \frac{d}{dt}\ln({}_tp_x) = \frac{f_x(t)}{{}_tp_x}\]</span></p>
+</section>
+<section id="tablas-de-mortalidad" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="tablas-de-mortalidad"><span class="header-section-number">1.3</span> Tablas de mortalidad</h2>
+<p>Para la construcción de una tabla de mortalidad, se quiere conocer el número de personas vivas en cada perioso y el número de defunciones.</p>
+<ul>
+<li><span class="math inline">\(l_x\)</span>: Número de personas con vida a edad (<span class="math inline">\(x\)</span>).</li>
+<li><span class="math inline">\(d_x\)</span>: Número de personas muertas a edad (<span class="math inline">\(x\)</span>).</li>
+<li><span class="math inline">\(r\)</span>; radix poblacionad; número de personas vivas al inicio del estudio.</li>
+</ul>
+<p>En general,</p>
+<p><span class="math display">\[d_x = l_x - l_{x+1}\]</span></p>
+<p>Para el cálculo de probabilidades:</p>
+<p><span class="math display">\[p_x = \frac{l_{x+1}}{l_x}\]</span></p>
+<p><span class="math display">\[q_x = \frac{d_x}{l_x}\]</span></p>
+<p>Más aún</p>
+</section>
+</section>
+<section id="ley-de-de-moivre-1729" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Ley de De Moivre (1729)</h1>
+<p>Definimos</p>
+<p><span class="math display">\[\mu_x = \frac{1}{\omega - x}, \quad 0 &lt; x &lt; \omega\]</span></p>
+<p>De aquí se sigue que</p>
+<p><span class="math display">\[S_0(t) = \frac{\omega - x}{\omega}\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tm1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tm1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["int"],"align":["right"]}],"data":[{"1":"1"},{"1":"2"},{"1":"3"},{"1":"4"},{"1":"5"},{"1":"6"},{"1":"7"},{"1":"8"},{"1":"9"},{"1":"10"},{"1":"11"},{"1":"12"},{"1":"13"},{"1":"14"},{"1":"15"},{"1":"16"},{"1":"17"},{"1":"18"},{"1":"19"},{"1":"20"},{"1":"21"},{"1":"22"},{"1":"23"},{"1":"24"},{"1":"25"},{"1":"26"},{"1":"27"},{"1":"28"},{"1":"29"},{"1":"30"},{"1":"31"},{"1":"32"},{"1":"33"},{"1":"34"},{"1":"35"},{"1":"36"},{"1":"37"},{"1":"38"},{"1":"39"},{"1":"40"},{"1":"41"},{"1":"42"},{"1":"43"},{"1":"44"},{"1":"45"},{"1":"46"},{"1":"47"},{"1":"48"},{"1":"49"},{"1":"50"},{"1":"51"},{"1":"52"},{"1":"53"},{"1":"54"},{"1":"55"},{"1":"56"},{"1":"57"},{"1":"58"},{"1":"59"},{"1":"60"},{"1":"61"},{"1":"62"},{"1":"63"},{"1":"64"},{"1":"65"},{"1":"66"},{"1":"67"},{"1":"68"},{"1":"69"},{"1":"70"},{"1":"71"},{"1":"72"},{"1":"73"},{"1":"74"},{"1":"75"},{"1":"76"},{"1":"77"},{"1":"78"},{"1":"79"},{"1":"80"},{"1":"81"},{"1":"82"},{"1":"83"},{"1":"84"},{"1":"85"},{"1":"86"},{"1":"87"},{"1":"88"},{"1":"89"},{"1":"90"},{"1":"91"},{"1":"92"},{"1":"93"},{"1":"94"},{"1":"95"},{"1":"96"},{"1":"97"},{"1":"98"},{"1":"99"},{"1":"100"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tm1<span class="sc">$</span>px <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">/</span> (w <span class="sc">-</span> tm1<span class="sc">$</span>x))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tm1<span class="sc">$</span>px[w <span class="sc">-</span> <span class="dv">1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#qx</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tm1<span class="sc">$</span>qx <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> tm1<span class="sc">$</span>px</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>tm1<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w <span class="sc">-</span> <span class="dv">2</span>)) {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  tm1<span class="sc">$</span>lx[k <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">=</span> tm1<span class="sc">$</span>lx[k] <span class="sc">*</span> tm1<span class="sc">$</span>px[k]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>tm1<span class="sc">$</span>dx <span class="ot">=</span> tm1<span class="sc">$</span>lx <span class="sc">*</span> tm1<span class="sc">$</span>qx</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">##Recordemos que ex = ex:n + npx*e{x+n}</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">##Si n=1, ex = px*(1+e{x+1})</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>tm1<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w <span class="sc">-</span> <span class="dv">2</span>)) {</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  tm1<span class="sc">$</span>ex[w <span class="sc">-</span> <span class="dv">1</span> <span class="sc">-</span> k] <span class="ot">=</span> tm1<span class="sc">$</span>px[w <span class="sc">-</span> <span class="dv">1</span> <span class="sc">-</span> k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm1<span class="sc">$</span>ex[w <span class="sc">-</span> k])</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm1<span class="sc">$</span>qx[<span class="dv">1</span><span class="sc">:</span>(w <span class="sc">-</span> <span class="dv">2</span>)],</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">'x'</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">'qx'</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">'Ley de De Moivre'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelos-mortalidad_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ley-de-gompertz" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Ley de Gompertz</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">=</span> <span class="fl">0.000185</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>C <span class="ot">=</span> <span class="fl">1.068573</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>tm2 <span class="ot">=</span> <span class="fu">data.frame</span>(x)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>tm2<span class="sc">$</span>px <span class="ot">=</span> <span class="fu">exp</span>(B<span class="sc">*</span>(C<span class="sc">^</span>tm2<span class="sc">$</span>x)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>C)<span class="sc">/</span><span class="fu">log</span>(C))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>tm2<span class="sc">$</span>px[w<span class="dv">-1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#qx</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>tm2<span class="sc">$</span>qx <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> tm2<span class="sc">$</span>px</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>tm2<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  tm2<span class="sc">$</span>lx[k<span class="sc">+</span><span class="dv">1</span>] <span class="ot">=</span> tm2<span class="sc">$</span>lx[k] <span class="sc">*</span> tm2<span class="sc">$</span>px[k]</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>tm2<span class="sc">$</span>dx <span class="ot">=</span> tm2<span class="sc">$</span>lx <span class="sc">*</span> tm2<span class="sc">$</span>qx</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>tm2<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  tm2<span class="sc">$</span>ex[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="ot">=</span> tm2<span class="sc">$</span>px[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm2<span class="sc">$</span>ex[w<span class="sc">-</span>k])</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm2<span class="sc">$</span>qx[<span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)], <span class="at">xlab=</span><span class="st">'x'</span>, <span class="at">ylab=</span><span class="st">'qx'</span>, <span class="at">main=</span><span class="st">'Ley de Gompertz'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelos-mortalidad_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ley-de-makeham" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Ley de Makeham</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>A <span class="ot">=</span> <span class="sc">-</span><span class="fl">0.0001</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>B <span class="ot">=</span> <span class="fl">0.00021</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>C <span class="ot">=</span> <span class="fl">1.0901</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>tm3 <span class="ot">=</span> <span class="fu">data.frame</span>(x)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>tm3<span class="sc">$</span>px <span class="ot">=</span> <span class="fu">exp</span>((B<span class="sc">*</span>(C<span class="sc">^</span>tm3<span class="sc">$</span>x)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>C))<span class="sc">/</span><span class="fu">log</span>(C)<span class="sc">-</span>A)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>tm3<span class="sc">$</span>px[w<span class="dv">-1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#qx</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>tm3<span class="sc">$</span>qx <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> tm3<span class="sc">$</span>px</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>tm3<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  tm3<span class="sc">$</span>lx[k<span class="sc">+</span><span class="dv">1</span>] <span class="ot">=</span> tm3<span class="sc">$</span>lx[k] <span class="sc">*</span> tm3<span class="sc">$</span>px[k]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>tm3<span class="sc">$</span>dx <span class="ot">=</span> tm3<span class="sc">$</span>lx <span class="sc">*</span> tm3<span class="sc">$</span>qx</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>tm3<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  tm3<span class="sc">$</span>ex[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="ot">=</span> tm3<span class="sc">$</span>px[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm3<span class="sc">$</span>ex[w<span class="sc">-</span>k])</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm3<span class="sc">$</span>qx[<span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)], <span class="at">xlab=</span><span class="st">'x'</span>, <span class="at">ylab=</span><span class="st">'qx'</span>, <span class="at">main=</span><span class="st">'Ley de Makeham'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelos-mortalidad_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="modelo-de-weibull" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Modelo de Weibull</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fl">0.000005</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>tm4 <span class="ot">=</span> <span class="fu">data.frame</span>(x)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>tm4<span class="sc">$</span>px <span class="ot">=</span> <span class="fu">exp</span>(k<span class="sc">*</span>(tm4<span class="sc">$</span>x<span class="sc">^</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">-</span>(tm4<span class="sc">$</span>x<span class="sc">+</span><span class="dv">1</span>)<span class="sc">^</span>(n<span class="sc">+</span><span class="dv">1</span>))<span class="sc">/</span>(n<span class="sc">+</span><span class="dv">1</span>))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>tm4<span class="sc">$</span>px[w<span class="dv">-1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#qx</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>tm4<span class="sc">$</span>qx <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> tm4<span class="sc">$</span>px</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>tm4<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  tm4<span class="sc">$</span>lx[k<span class="sc">+</span><span class="dv">1</span>] <span class="ot">=</span> tm4<span class="sc">$</span>lx[k] <span class="sc">*</span> tm4<span class="sc">$</span>px[k]</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>tm4<span class="sc">$</span>dx <span class="ot">=</span> tm4<span class="sc">$</span>lx <span class="sc">*</span> tm4<span class="sc">$</span>qx</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>tm4<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  tm4<span class="sc">$</span>ex[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="ot">=</span> tm4<span class="sc">$</span>px[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm4<span class="sc">$</span>ex[w<span class="sc">-</span>k])</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm4<span class="sc">$</span>qx[<span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)], <span class="at">xlab=</span><span class="st">'x'</span>, <span class="at">ylab=</span><span class="st">'qx'</span>, <span class="at">main=</span><span class="st">'Modelo de Weibull'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelos-mortalidad_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="modelo-de-pareto" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Modelo de Pareto</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fl">0.03</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>tm5 <span class="ot">=</span> <span class="fu">data.frame</span>(x)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>tm5<span class="sc">$</span>px <span class="ot">=</span> ((b<span class="sc">+</span>tm5<span class="sc">$</span>x)<span class="sc">/</span>(b<span class="sc">+</span>tm5<span class="sc">$</span>x<span class="sc">+</span><span class="dv">1</span>))<span class="sc">^</span>a</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>tm5<span class="sc">$</span>px[w<span class="dv">-1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#qx</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>tm5<span class="sc">$</span>qx <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> tm5<span class="sc">$</span>px</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>tm5<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  tm5<span class="sc">$</span>lx[k<span class="sc">+</span><span class="dv">1</span>] <span class="ot">=</span> tm5<span class="sc">$</span>lx[k] <span class="sc">*</span> tm5<span class="sc">$</span>px[k]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>tm5<span class="sc">$</span>dx <span class="ot">=</span> tm5<span class="sc">$</span>lx <span class="sc">*</span> tm5<span class="sc">$</span>qx</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>tm5<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  tm5<span class="sc">$</span>ex[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="ot">=</span> tm5<span class="sc">$</span>px[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm5<span class="sc">$</span>ex[w<span class="sc">-</span>k])</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm5<span class="sc">$</span>qx[<span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)], <span class="at">xlab=</span><span class="st">'x'</span>, <span class="at">ylab=</span><span class="st">'qx'</span>, <span class="at">main=</span><span class="st">'Modelo de Pareto'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelos-mortalidad_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="modelo-de-fuerza-de-mortalidad-constante" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Modelo de Fuerza de Mortalidad Constante</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fl">0.005</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>tm6 <span class="ot">=</span> <span class="fu">data.frame</span>(x)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>tm6<span class="sc">$</span>px <span class="ot">=</span> <span class="fu">exp</span>(<span class="sc">-</span>mu)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>tm6<span class="sc">$</span>px[w<span class="dv">-1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#qx</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>tm6<span class="sc">$</span>qx <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> tm6<span class="sc">$</span>px</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>tm6<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  tm6<span class="sc">$</span>lx[k<span class="sc">+</span><span class="dv">1</span>] <span class="ot">=</span> tm6<span class="sc">$</span>lx[k] <span class="sc">*</span> tm6<span class="sc">$</span>px[k]</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>tm6<span class="sc">$</span>dx <span class="ot">=</span> tm6<span class="sc">$</span>lx <span class="sc">*</span> tm6<span class="sc">$</span>qx</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>tm6<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  tm6<span class="sc">$</span>ex[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="ot">=</span> tm6<span class="sc">$</span>px[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm6<span class="sc">$</span>ex[w<span class="sc">-</span>k])</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm6<span class="sc">$</span>qx[<span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)], <span class="at">xlab=</span><span class="st">'x'</span>, <span class="at">ylab=</span><span class="st">'qx'</span>, <span class="at">main=</span><span class="st">'Modelo de FMC'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelos-mortalidad_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="modelo-de-de-moivre-generalizado" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Modelo de De Moivre Generalizado</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>tm7 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>tm7<span class="sc">$</span>px <span class="ot">=</span> ((w<span class="sc">-</span>tm7<span class="sc">$</span>x<span class="dv">-1</span>)<span class="sc">/</span>(w<span class="sc">-</span>tm7<span class="sc">$</span>x))<span class="sc">^</span>(alpha)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>tm7<span class="sc">$</span>px[w<span class="dv">-1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#qx</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>tm7<span class="sc">$</span>qx <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span> tm7<span class="sc">$</span>px</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>tm7<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  tm7<span class="sc">$</span>lx[k<span class="sc">+</span><span class="dv">1</span>] <span class="ot">=</span> tm7<span class="sc">$</span>lx[k] <span class="sc">*</span> tm7<span class="sc">$</span>px[k]</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>tm7<span class="sc">$</span>dx <span class="ot">=</span> tm7<span class="sc">$</span>lx <span class="sc">*</span> tm7<span class="sc">$</span>qx</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>tm7<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)){</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  tm7<span class="sc">$</span>ex[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="ot">=</span> tm7<span class="sc">$</span>px[w<span class="dv">-1</span><span class="sc">-</span>k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm7<span class="sc">$</span>ex[w<span class="sc">-</span>k])</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm7<span class="sc">$</span>qx[<span class="dv">1</span><span class="sc">:</span>(w<span class="dv">-2</span>)], <span class="at">xlab=</span><span class="st">'x'</span>, <span class="at">ylab=</span><span class="st">'qx'</span>, <span class="at">main=</span><span class="st">'Modelo de De Moivre Generalizado'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="modelos-mortalidad_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="modelo-experiencia-mexicana-2000-de-la-cnsf" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Modelo Experiencia Mexicana 2000 de la CNSF</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tm8 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">'https://drive.google.com/uc?id=1bwd_0PdLScpOrS6b7_ghzPYtjdZTe0GR&amp;export=download&amp;authuser=0'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#px</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>tm8<span class="sc">$</span>px <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> tm8<span class="sc">$</span>qx</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#lx</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>tm8<span class="sc">$</span>lx <span class="ot">=</span> l1</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">88</span>){</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  tm8<span class="sc">$</span>lx[k<span class="sc">+</span><span class="dv">1</span>] <span class="ot">=</span> tm8<span class="sc">$</span>lx[k] <span class="sc">*</span> tm8<span class="sc">$</span>px[k]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#dx</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>tm8<span class="sc">$</span>dx <span class="ot">=</span> tm8<span class="sc">$</span>lx <span class="sc">*</span> tm8<span class="sc">$</span>qx</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ex</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>tm8<span class="sc">$</span>ex <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">88</span>){</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  tm8<span class="sc">$</span>ex[<span class="dv">89</span><span class="sc">-</span>k] <span class="ot">=</span> tm8<span class="sc">$</span>px[<span class="dv">89</span><span class="sc">-</span>k] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tm8<span class="sc">$</span>ex[<span class="dv">90</span><span class="sc">-</span>k])</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tm8<span class="sc">$</span>qx[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">88</span>)], <span class="at">xlab=</span><span class="st">'x'</span>, <span class="at">ylab=</span><span class="st">'qx'</span>, <span class="at">main=</span><span class="st">'Modelo Experiencia Mexicana 2000 de la CNSF'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="escribir-en-csv" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Escribir en CSV</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#=============================================================================#</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#csv</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">"write.table(tm1, </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/01 De Moivre.csv', </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">write.table(tm2, </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/02 Gompertz.csv', </span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="st">write.table(tm3, </span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/03 Makeham.csv', </span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="st">write.table(tm4, </span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/04 Weibull.csv', </span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="st">write.table(tm5, </span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/05 Pareto.csv', </span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="st">write.table(tm6, </span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/06 FMC.csv', </span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="st">write.table(tm7, </span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/07 De Moivre Generalizado.csv', </span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="st">write.table(tm8, </span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="st">            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/08 CNSF 2000.csv', </span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="st">            sep = ',', row.names = FALSE, col.names = TRUE)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "write.table(tm1, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/01 De Moivre.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)\n\nwrite.table(tm2, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/02 Gompertz.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)\n\nwrite.table(tm3, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/03 Makeham.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)\n\nwrite.table(tm4, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/04 Weibull.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)\n\nwrite.table(tm5, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/05 Pareto.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)\n\nwrite.table(tm6, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/06 FMC.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)\n\nwrite.table(tm7, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/07 De Moivre Generalizado.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)\n\nwrite.table(tm8, \n            file = 'C:/Users/Erick/Documents/Actuaría/Semestre 6/Matemáticas Actuariales del Seguro de Personas 1/Proyecto 1/08 CNSF 2000.csv', \n            sep = ',', row.names = FALSE, col.names = TRUE)"</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
