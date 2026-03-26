@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Module 1: Introduction to Python and Computer Programming – Erick Canul</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707710bb7a0eddacf54b96aa728de139.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-2ad43377c2721eee0d9aa3f1e2119c78.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-f69dd01e971a21a7fbf21548c79dab50.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+
+<script src="../../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Erick Canul</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../01-experiencia/index-experiencia.qmd"> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../02-universidad-trabajos/index-universidad-trabajos.qmd"> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../99-universidad-material/index-universidad-material.html"> 
+<span class="menu-text">Asignaturas</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../03-cursos/index-cursos.html" aria-current="page"> 
+<span class="menu-text">Extracurricular</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../03-cursos/cisco-python-essentials/index-cisco-python-essentials.html">Python Essentials by CISCO</a></li><li class="breadcrumb-item"><a href="../../../03-cursos/cisco-python-essentials/01-introduction-python/01-introduction-python.html">Module 1: Introduction to Python and Computer Programming</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/index-cursos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extracurricular</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../03-cursos/datacamp-data-scientist/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Associate Data Scientist in Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/03-netflix-movies/03-netflix-movies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Investigating Netflix Movies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/04-data-manipulations-pandas/04-data-manipulation-pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Manipulation with pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/05-nyc-sat/05-sat-nyc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploring NYC Public School Test Result Scores</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/06-joins-pandas/06-joins-pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Joining Data with pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/07-intro-statistics-python/07-statistics-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Statistics in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/08-intro-matplotlib/08-matplotlib-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Data Visualization with Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/09-intro-seaborn/09-seaborn-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Data Visualization with Seaborn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/10-nobel-winners/10-nobel-winners-withR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visualizing the History of Nobel Prize Winners</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/11-intro-functions-python/11-intro-functions-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Functions in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/datacamp-data-scientist/12-python-toolbox/12-python-toolbox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python Toolbox</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../03-cursos/associate-data-analyst-sql/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Associate Data Analyst in SQL</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/associate-data-analyst-sql/01-sql-introduction/01-introduction-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to SQL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/associate-data-analyst-sql/02-joins/02-joins.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Joins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/associate-data-analyst-sql/03-data-manipulation/03-data-manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Manipulation in SQL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/associate-data-analyst-sql/04-postgresql-summary-and-window-functions/04-postgres-summary-window.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PostgreSQL summary and window functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/associate-data-analyst-sql/05-postgresql-manipulation-functions/05-data-manipulation-postgresql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions for manipulating data in PostgreSQL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/associate-data-analyst-sql/07-exploratory-data-analysis-sql/07-eda-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis in SQL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../03-cursos/cisco-python-essentials/index-cisco-python-essentials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python Essentials by CISCO</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cisco-python-essentials/01-introduction-python/01-introduction-python.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Module 1: Introduction to Python and Computer Programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cisco-python-essentials/02/02-module2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 2: Python Data Types, Variables, Operators, and Basic I/O Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cisco-python-essentials/03-module3/03-module3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 3 Part 1: Boolean Values, Conditional Execution, Loops, Logical and Bitwise Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cisco-python-essentials/03-module3-part2/03-module3-part2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 3 Part 2: Lists and List Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cisco-python-essentials/04-module4/04-module4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 4: Functions, Tuples, Dictionaries, Exceptions, and Data Processing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../03-cursos/cisco-python-essentials-2/index-cisco-python-essentials-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python Essentials 2 by CISCO</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cisco-python-essentials-2/01-module1/01-module1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 1: Modules, Packages, and PIP</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../03-cursos/cognitiveclass-ibm-r/index-cognitiveclass-ibm-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R 101</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cognitiveclass-ibm-r/03-lists-dataframes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lists and Dataframes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/cognitiveclass-ibm-r/04-conditions-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loops and Conditions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../03-cursos/vba-wiseowl/vba-wiseowl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VBA por WiseOwl</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-programming" id="toc-introduction-to-programming" class="nav-link active" data-scroll-target="#introduction-to-programming"><span class="header-section-number">1</span> Introduction to Programming</a>
+  <ul>
+  <li><a href="#how-does-a-computer-program-work" id="toc-how-does-a-computer-program-work" class="nav-link" data-scroll-target="#how-does-a-computer-program-work"><span class="header-section-number">1.1</span> How does a computer program work?</a></li>
+  <li><a href="#natural-languages-vs.-programming-languages" id="toc-natural-languages-vs.-programming-languages" class="nav-link" data-scroll-target="#natural-languages-vs.-programming-languages"><span class="header-section-number">1.2</span> Natural languages vs.&nbsp;programming languages</a></li>
+  <li><a href="#what-makes-a-language" id="toc-what-makes-a-language" class="nav-link" data-scroll-target="#what-makes-a-language"><span class="header-section-number">1.3</span> What makes a language?</a></li>
+  <li><a href="#machine-language-vs.-high-level-language" id="toc-machine-language-vs.-high-level-language" class="nav-link" data-scroll-target="#machine-language-vs.-high-level-language"><span class="header-section-number">1.4</span> Machine language vs.&nbsp;high-level language</a></li>
+  <li><a href="#compilation-vs.-interpretation" id="toc-compilation-vs.-interpretation" class="nav-link" data-scroll-target="#compilation-vs.-interpretation"><span class="header-section-number">1.5</span> Compilation vs.&nbsp;Interpretation</a></li>
+  <li><a href="#what-does-the-interpreter-do" id="toc-what-does-the-interpreter-do" class="nav-link" data-scroll-target="#what-does-the-interpreter-do"><span class="header-section-number">1.6</span> What does the interpreter do</a></li>
+  <li><a href="#compilation-vs.-interpretation-advantages-and-disadvantages" id="toc-compilation-vs.-interpretation-advantages-and-disadvantages" class="nav-link" data-scroll-target="#compilation-vs.-interpretation-advantages-and-disadvantages"><span class="header-section-number">1.7</span> Compilation vs.&nbsp;Interpretation – Advantages and Disadvantages</a></li>
+  </ul></li>
+  <li><a href="#introduction-to-python" id="toc-introduction-to-python" class="nav-link" data-scroll-target="#introduction-to-python"><span class="header-section-number">2</span> Introduction to Python</a>
+  <ul>
+  <li><a href="#python-a-tool-not-a-reptile" id="toc-python-a-tool-not-a-reptile" class="nav-link" data-scroll-target="#python-a-tool-not-a-reptile"><span class="header-section-number">2.1</span> Python – a tool, not a reptile</a></li>
+  <li><a href="#who-created-python" id="toc-who-created-python" class="nav-link" data-scroll-target="#who-created-python"><span class="header-section-number">2.2</span> Who created Python?</a></li>
+  <li><a href="#a-hobby-programming-project" id="toc-a-hobby-programming-project" class="nav-link" data-scroll-target="#a-hobby-programming-project"><span class="header-section-number">2.3</span> A hobby programming project</a></li>
+  <li><a href="#why-python" id="toc-why-python" class="nav-link" data-scroll-target="#why-python"><span class="header-section-number">2.4</span> Why Python?</a></li>
+  <li><a href="#python-rivals" id="toc-python-rivals" class="nav-link" data-scroll-target="#python-rivals"><span class="header-section-number">2.5</span> Python rivals?</a></li>
+  <li><a href="#where-can-we-see-python-in-action" id="toc-where-can-we-see-python-in-action" class="nav-link" data-scroll-target="#where-can-we-see-python-in-action"><span class="header-section-number">2.6</span> Where can we see Python in action?</a></li>
+  <li><a href="#why-not-python" id="toc-why-not-python" class="nav-link" data-scroll-target="#why-not-python"><span class="header-section-number">2.7</span> Why not Python?</a></li>
+  <li><a href="#there-is-more-than-one-python" id="toc-there-is-more-than-one-python" class="nav-link" data-scroll-target="#there-is-more-than-one-python"><span class="header-section-number">2.8</span> There is more than one Python</a></li>
+  <li><a href="#python-implementations" id="toc-python-implementations" class="nav-link" data-scroll-target="#python-implementations"><span class="header-section-number">2.9</span> Python implementations</a>
+  <ul>
+  <li><a href="#cython" id="toc-cython" class="nav-link" data-scroll-target="#cython"><span class="header-section-number">2.9.1</span> Cython</a></li>
+  <li><a href="#jython" id="toc-jython" class="nav-link" data-scroll-target="#jython"><span class="header-section-number">2.9.2</span> Jython</a></li>
+  <li><a href="#micropython" id="toc-micropython" class="nav-link" data-scroll-target="#micropython"><span class="header-section-number">2.9.3</span> MicroPython</a></li>
+  <li><a href="#pypy" id="toc-pypy" class="nav-link" data-scroll-target="#pypy"><span class="header-section-number">2.9.4</span> PyPy</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#downloading-and-installing-python" id="toc-downloading-and-installing-python" class="nav-link" data-scroll-target="#downloading-and-installing-python"><span class="header-section-number">3</span> Downloading and Installing Python</a>
+  <ul>
+  <li><a href="#how-to-get-python-and-how-to-get-to-use-it" id="toc-how-to-get-python-and-how-to-get-to-use-it" class="nav-link" data-scroll-target="#how-to-get-python-and-how-to-get-to-use-it"><span class="header-section-number">3.1</span> How to get Python and how to get to use it</a></li>
+  <li><a href="#how-to-download-install-and-configure-python" id="toc-how-to-download-install-and-configure-python" class="nav-link" data-scroll-target="#how-to-download-install-and-configure-python"><span class="header-section-number">3.2</span> How to download, install, and configure Python</a></li>
+  <li><a href="#starting-your-work-with-python" id="toc-starting-your-work-with-python" class="nav-link" data-scroll-target="#starting-your-work-with-python"><span class="header-section-number">3.3</span> Starting your work with Python</a></li>
+  <li><a href="#your-very-first-program-before-your-first-program" id="toc-your-very-first-program-before-your-first-program" class="nav-link" data-scroll-target="#your-very-first-program-before-your-first-program"><span class="header-section-number">3.4</span> Your very first program before your first program…</a></li>
+  <li><a href="#how-to-spoil-and-fix-your-code" id="toc-how-to-spoil-and-fix-your-code" class="nav-link" data-scroll-target="#how-to-spoil-and-fix-your-code"><span class="header-section-number">3.5</span> How to spoil and fix your code</a></li>
+  </ul></li>
+  <li><a href="#module-test" id="toc-module-test" class="nav-link" data-scroll-target="#module-test"><span class="header-section-number">4</span> Module test</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../03-cursos/cisco-python-essentials/index-cisco-python-essentials.html">Python Essentials by CISCO</a></li><li class="breadcrumb-item"><a href="../../../03-cursos/cisco-python-essentials/01-introduction-python/01-introduction-python.html">Module 1: Introduction to Python and Computer Programming</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Module 1: Introduction to Python and Computer Programming</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction-to-programming" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction to Programming</h1>
+<p>We will start off by learning about some of the universal concepts of programming, such as instruction list, source file, language elements, compilation and interpretation. Ready? Let’s start!</p>
+<section id="how-does-a-computer-program-work" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="how-does-a-computer-program-work"><span class="header-section-number">1.1</span> How does a computer program work?</h2>
+<p>A program makes a computer usable. Without a program, a computer, even the most powerful one, is nothing more than an object. Similarly, without a player, a piano is nothing more than a wooden box.</p>
+<p>Computers are able to perform very complex tasks, but this ability is not innate. A computer’s nature is quite different.</p>
+<p>It can execute only extremely simple operations. For example, a computer cannot understand the value of a complicated mathematical function by itself, although this isn’t beyond the realms of possibility in the near future.</p>
+<p>Contemporary computers can only evaluate the results of very fundamental operations, like adding or dividing, but they can do it very fast, and can repeat these actions virtually any number of times.</p>
+<p>Imagine that you want to know the average speed you’ve reached during a long journey. You know the distance, you know the time, you need the speed.</p>
+<p>Naturally, the computer will be able to compute this, but the computer is not aware of such things as distance, speed, or time. Therefore, it is necessary to instruct the computer to:</p>
+<ul>
+<li><p>accept a number representing the distance;</p></li>
+<li><p>accept a number representing the travel time;</p></li>
+<li><p>divide the former value by the latter and store the result in the memory;</p></li>
+<li><p>display the result (representing the average speed) in a readable format.</p></li>
+</ul>
+<p>These four simple actions form a <strong>program</strong>. Of course, these examples are not formalized, and they are very far from what the computer can understand, but they are good enough to be translated into a language the computer can accept.</p>
+<p><strong>Language</strong> is the keyword.</p>
+</section>
+<section id="natural-languages-vs.-programming-languages" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="natural-languages-vs.-programming-languages"><span class="header-section-number">1.2</span> Natural languages vs.&nbsp;programming languages</h2>
+<p>A language is a means (and a tool) for expressing and recording thoughts. There are many languages all around us. Some of them require neither speaking nor writing, such as body language; it’s possible to express your deepest feelings very precisely without saying a word.</p>
+<p>Another language you use each day is your mother tongue, which you use to manifest your will and to ponder reality. Computers have their own language, too, called <strong>machine</strong> language, which is very rudimentary.</p>
+<p>A computer, even the most technically sophisticated, is devoid of even a trace of intelligence. You could say that it is like a well-trained dog - it responds only to a predetermined set of known commands.</p>
+<p>The commands it recognizes are very simple. We can imagine that the computer responds to orders like “take that number, divide by another and save the result”.</p>
+<p>A complete set of known commands is called an <strong>instruction list (IL)</strong>, sometimes abbreviated to <strong>IL</strong>. Different types of computers may vary depending on the size of their ILs, and the instructions could be completely different in different models.</p>
+<p>Note: machine languages are developed by humans.</p>
+<p>No computer is currently capable of creating a new language. However, that may change soon. Just as people use a number of very different languages, machines have many different languages, too. The difference, though, is that human languages developed naturally.</p>
+<p>Moreover, they are still evolving, and new words are created every day as old words disappear. These languages are called <strong>natural languages</strong>.</p>
+</section>
+<section id="what-makes-a-language" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="what-makes-a-language"><span class="header-section-number">1.3</span> What makes a language?</h2>
+<p>We can say that each language (machine or natural, it doesn’t matter) consists of the following elements:</p>
+<ul>
+<li><p>an <strong>alphabet</strong>: a set of symbols used to build words of a certain language (e.g., the Latin alphabet for English, the Cyrillic alphabet for Russian, Kanji for Japanese, and so on).</p></li>
+<li><p>a <strong>lexis</strong>: (aka a dictionary) a set of words the language offers its users (e.g., the word “computer” comes from the English language dictionary, while “cmoptrue” doesn’t; the word “chat” is present both in English and French dictionaries, but their meanings are different).</p></li>
+<li><p>a <strong>syntax</strong>: a set of rules (formal or informal, written or felt intuitively) used to determine if a certain string of words forms a valid sentence (e.g., “I am a python” is a syntactically correct phrase, while “I a python am” isn’t).</p></li>
+<li><p><strong>semantics</strong>: a set of rules determining if a certain phrase makes sense (e.g., “I ate a doughnut” makes sense, but “A doughnut ate me” doesn’t).</p></li>
+</ul>
+</section>
+<section id="machine-language-vs.-high-level-language" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="machine-language-vs.-high-level-language"><span class="header-section-number">1.4</span> Machine language vs.&nbsp;high-level language</h2>
+<p>The IL is, in fact, <strong>the alphabet of a machine language</strong>. This is the simplest and most primary set of symbols we can use to give commands to a computer. It’s the computer’s mother tongue.</p>
+<p>Unfortunately, this mother tongue is a far cry from a human mother tongue. We both (computers and humans) need something else, a common language for computers and humans, or a bridge between the two different worlds.</p>
+<p>We need a language in which humans can write their programs and a language that computers may use to execute the programs, one that is far more complex than machine language and yet far simpler than natural language.</p>
+<p>Such languages are often called high-level programming languages. They are at least somewhat similar to natural ones in that they use symbols, words and conventions readable to humans. These languages enable humans to express commands to computers that are much more complex than those offered by ILs.</p>
+<p>A program written in a high-level programming language is called a <strong>source code</strong> (in contrast to the machine code executed by computers). Similarly, the file containing the source code is called the <strong>source file</strong>.</p>
+</section>
+<section id="compilation-vs.-interpretation" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="compilation-vs.-interpretation"><span class="header-section-number">1.5</span> Compilation vs.&nbsp;Interpretation</h2>
+<p>Computer programming is the act of composing the selected programming language’s elements in the order that will cause the desired effect. The effect could be different in every specific case – it’s up to the programmer’s imagination, knowledge and experience.</p>
+<p>Of course, such a composition has to be correct in many senses:</p>
+<ul>
+<li><p><strong>alphabetically</strong> – a program needs to be written in a recognizable script, such as Roman, Cyrillic, etc.</p></li>
+<li><p><strong>lexically</strong> – each programming language has its dictionary and you need to master it; thankfully, it’s much simpler and smaller than the dictionary of any natural language;</p></li>
+<li><p><strong>syntactically</strong> – each language has its rules and they must be obeyed;</p></li>
+<li><p><strong>semantically</strong> – the program has to make sense.</p></li>
+</ul>
+<p>Unfortunately, a programmer can also make mistakes with each of the above four senses. Each of them can cause the program to become completely useless.</p>
+<p>Let’s assume that you’ve successfully written a program. How do we persuade the computer to execute it? You have to render your program into machine language. Luckily, the translation can be done by a computer itself, making the whole process fast and efficient.</p>
+<p>There are two different ways of <strong>transforming a program from a high-level programming language into machine language</strong>:</p>
+<ul>
+<li><p><strong>Compilation</strong>: the source program is translated once (however, this act must be repeated each time you modify the source code) by getting a file (e.g., an <em>.exe</em> file if the code is intended to be run under MS Windows) containing the machine code. Now you can distribute the file worldwide; the program that performs this translation is called a <strong>compiler</strong> or <strong>translator</strong>.</p></li>
+<li><p><strong>Interpretation</strong>: you (or any user of the code) can translate the source program each time it has to be run. The program performing this kind of transformation is called an <strong>interpreter</strong>, as interprets the code every time it is intended to be executed. It also means that you cannot just distribute the source code as-is, because the end-user also needs the interpreter to execute it.</p></li>
+</ul>
+<p>Due to some very fundamental reasons, a particular high-level programming language is designed to fall into one of these two categories.</p>
+<p>There are very few languages that can be both compiled and interpreted. Usually, a programming language is projected with this factor in its constructors’ minds – will it be compiled or interpreted?</p>
+</section>
+<section id="what-does-the-interpreter-do" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="what-does-the-interpreter-do"><span class="header-section-number">1.6</span> What does the interpreter do</h2>
+<p>Let’s assume once more that you have written a program. Now, it exists as a <strong>computer file</strong>: a computer program is actually a piece of text, so the source code is usually placed in <strong>text files</strong>.</p>
+<p>Note: it has to be <strong>pure text</strong>, without any decorations like different fonts, colors, embedded images or other media. Now you have to invoke the interpreter and let it read your source file.</p>
+<p>The interpreter reads the source code in a way that is common in Western culture: from top to bottom and from left to right. There are some exceptions - they’ll be covered later in the course.</p>
+<p>First of all, the interpreter checks if all subsequent lines are correct (using the four aspects covered earlier).</p>
+<p>If the compiler finds an error, it finishes its work immediately. The only result in this case is an <strong>error message</strong>.</p>
+<p>The interpreter will inform you where the error is located and what caused it. However, these messages may be misleading, as the interpreter isn’t able to follow your exact intentions, and may detect errors at some distance from their real causes.</p>
+<p>For example, if you try to use an entity of an unknown name, it will cause an error, but the error will be discovered in the place where it tries to use the entity, not where the new entity’s name was introduced.</p>
+<p>In other words, the actual reason is usually located a little earlier in the code, for example, in the place where you had to inform the interpreter that you were going to use the entity of the name.</p>
+<p>If the line looks good, the interpreter tries to execute it (note: each line is usually executed separately, so the trio “read-check-execute” can be repeated many times - more times than the actual number of lines in the source file, as some parts of the code may be executed more than once).</p>
+<p>It is also possible that a significant part of the code may be executed successfully before the interpreter finds an error. This is normal behavior in this execution model.</p>
+<p>You may ask now: which is better? The “compiling” model or the “interpreting” model? There is no obvious answer. If there had been, one of these models would have ceased to exist a long time ago. Both of them have their advantages and their disadvantages.</p>
+</section>
+<section id="compilation-vs.-interpretation-advantages-and-disadvantages" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="compilation-vs.-interpretation-advantages-and-disadvantages"><span class="header-section-number">1.7</span> Compilation vs.&nbsp;Interpretation – Advantages and Disadvantages</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 43%">
+<col style="width: 51%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Compilation</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Advantages</strong></td>
+<td><ul>
+<li><p>The execution of the translated code is usually faster.</p></li>
+<li><p>Only the user has to have the compiler - the end-user may use the code without it.</p></li>
+<li><p>The translated code is stored using machine language - as it is very hard to understand it, your own inventions and programming tricks are likely to remain your secret.</p></li>
+</ul></td>
+<td><ul>
+<li><p>You can run the code as soon as you complete it - there are no additional phases of translation.</p></li>
+<li><p>The code is stored using programming language - this means that it can be run on computers using different machine languages; you don’t compile your code separately for each different architecture.</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Disadvantages</strong></td>
+<td><ul>
+<li><p>The compilation itself may be a very time-consuming process - you may not be able to run your code immediately after making an amendment.</p></li>
+<li><p>You have to have as many compilers as hardware platforms you want your code to be run on.</p></li>
+</ul></td>
+<td><ul>
+<li><p>Don’t expect interpretation to ramp up your code to high speed - your code will share the computer’s power with the interpreter, so it can’t be really fast.</p></li>
+<li><p>Both you and the end user have to have the interpreter to run your code.</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<p>What does this all mean for you?</p>
+<ul>
+<li><p>Python is an <strong>interpreted language</strong>. This means that it inherits all the described advantages and disadvantages. Of course, it adds some of its unique features to both sets.</p></li>
+<li><p>If you want to program in Python, you’ll need the <strong>Python interpreter</strong>. You won’t be able to run your code without it. Fortunately, <strong>Python is free</strong>. This is one of its most important advantages.</p></li>
+</ul>
+<p>Due to historical reasons, languages designed to be utilized in the interpretation manner are often called <strong>scripting languages</strong>, while the source programs encoded using them are called <strong>scripts</strong>. Okay, let’s meet Python.</p>
+</section>
+</section>
+<section id="introduction-to-python" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Introduction to Python</h1>
+<p>Welcome to section two. Here, we will learn a little bit about the history of Python, different Python versions and implementations, and the impact that Python has had on modern-day programming. Let’s begin.</p>
+<section id="python-a-tool-not-a-reptile" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="python-a-tool-not-a-reptile"><span class="header-section-number">2.1</span> Python – a tool, not a reptile</h2>
+<p><strong>What is Python?</strong></p>
+<p>Python is a widely-used, interpreted, object-oriented, and high-level programming language with dynamic semantics, used for general-purpose programming.</p>
+<p>And while you may know the python as a large snake, the name of the Python programming language comes from an old BBC television comedy sketch series called <strong>Monty Python’s Flying Circus</strong>.</p>
+<p>At the height of its success, the Monty Python team were performing their sketches to live audiences across the world, including at the Hollywood Bowl.</p>
+<p>Since Monty Python is considered one of the two fundamental nutrients to a programmer (the other being pizza), Python’s creator named the language in honor of the TV show.</p>
+</section>
+<section id="who-created-python" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="who-created-python"><span class="header-section-number">2.2</span> Who created Python?</h2>
+<p>One of the amazing features of Python is the fact that it is actually one person’s work. Usually, new programming languages are developed and published by large companies employing lots of professionals, and due to copyright rules, it is very hard to name any of the people involved in the project. Python is an exception.</p>
+<p>There are not many languages whose authors are known by name. Python was created by <a href="https://en.wikipedia.org/wiki/Guido_van_Rossum"><strong>Guido van Rossum</strong></a>, born in 1956 in Haarlem, the Netherlands. Of course, Guido van Rossum did not develop and evolve all the Python components himself…</p>
+<p>The speed with which Python has spread around the world is a result of the continuous work of thousands (very often anonymous) programmers, testers, users (many of them aren’t IT specialists) and enthusiasts, but it must be said that the very first idea (the seed from which Python sprouted) came to one head – Guido’s.</p>
+<p><img src="img01/1.04.png" class="img-fluid" width="297"></p>
+</section>
+<section id="a-hobby-programming-project" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="a-hobby-programming-project"><span class="header-section-number">2.3</span> A hobby programming project</h2>
+<p>The circumstances in which Python was created are a bit puzzling. According to Guido van Rossum:</p>
+<p>In December 1989, I was looking for a “hobby” programming project that would keep me occupied during the week around Christmas. My office (…) would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python’s Flying Circus). <em>Guido van Rossum</em></p>
+<p><strong>Python goals</strong></p>
+<p>In 1999, Guido van Rossum defined his goals for Python:</p>
+<ul>
+<li><p>an <strong>easy and intuitive</strong> language just as powerful as those of the major competitors;</p></li>
+<li><p><strong>open source</strong>, so anyone can contribute to its development;</p></li>
+<li><p>code that is as <strong>understandable</strong> as plain English;</p></li>
+<li><p><strong>suitable for everyday tasks</strong>, allowing for short development times.</p></li>
+</ul>
+<p>About 20 years later, it is clear that all these intentions have been fulfilled. Some sources say that Python is the most popular programming language in the world, while others claim it’s the second or the third.</p>
+<p>Either way, it still occupies a high rank in the top ten of the <a href="http://pypl.github.io/PYPL.html">PYPL PopularitY of Programming Language</a> and the <a href="https://www.tiobe.com/tiobe-index/">TIOBE Programming Community Index</a>.</p>
+<p>Python isn’t a young language anymore. It is <strong>mature and trustworthy</strong>. It’s not a one-hit wonder. It’s a bright star in the programming firmament, and time spent learning Python is a very good investment.</p>
+</section>
+<section id="why-python" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="why-python"><span class="header-section-number">2.4</span> Why Python?</h2>
+<p>How does it happen that programmers, young and old, experienced and novice, want to use it? How did it happen that large companies adopted Python and implemented their flagship products using it?</p>
+<p>There are many reasons – we’ve listed some of them already, but let’s enumerate them again in a more practical manner:</p>
+<ul>
+<li><p>it’s <strong>easy to learn</strong> - the time needed to learn Python is shorter than for many other languages; this means that it’s possible to start the actual programming faster;</p></li>
+<li><p>it’s <strong>easy to teach</strong> - the teaching workload is smaller than that needed by other languages; this means that the teacher can put more emphasis on general (language-independent) programming techniques, not wasting energy on exotic tricks, strange exceptions and incomprehensible rules;</p></li>
+<li><p>it’s <strong>easy to use</strong> for writing new software - it’s often possible to write code faster when using Python;</p></li>
+<li><p>it’s <strong>easy to understand</strong> - it’s also often easier to understand someone else’s code faster if it is written in Python;</p></li>
+<li><p>it’s <strong>easy to obtain, install and deploy</strong> - Python is free, open and multiplatform; not all languages can boast that.</p></li>
+</ul>
+</section>
+<section id="python-rivals" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="python-rivals"><span class="header-section-number">2.5</span> Python rivals?</h2>
+<p>Python has two direct competitors, with comparable properties and predispositions. These are:</p>
+<ul>
+<li><p><strong>Perl</strong> – a scripting language originally authored by Larry Wall;</p></li>
+<li><p><strong>Ruby</strong> – a scripting language originally authored by Yukihiro Matsumoto.</p></li>
+</ul>
+<p>The former is more traditional and more conservative than Python, and resembles some of the old languages derived from the classic C programming language.</p>
+<p>In contrast, the latter is more innovative and more full of fresh ideas than Python. Python itself lies somewhere between these two creations.</p>
+<p>The Internet is full of forums with infinite discussions on the superiority of one of these three over the others, should you wish to learn more about each of them.</p>
+</section>
+<section id="where-can-we-see-python-in-action" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="where-can-we-see-python-in-action"><span class="header-section-number">2.6</span> Where can we see Python in action?</h2>
+<p>We see it every day and almost everywhere. It’s used extensively to implement complex <strong>Internet services</strong> like search engines, cloud storage and tools, social media and so on. Whenever you use any of these services, you are actually very close to Python, although you wouldn’t know it.</p>
+<p>Many <strong>developing tools</strong> are implemented in Python. More and more <strong>everyday-use applications</strong> are being written in Python. Lots of <strong>scientists</strong> have abandoned expensive proprietary tools and switched to Python. Lots of IT project <strong>testers</strong> have started using Python to carry out repeatable test procedures. The list is long.</p>
+</section>
+<section id="why-not-python" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="why-not-python"><span class="header-section-number">2.7</span> Why not Python?</h2>
+<p>Despite Python’s growing popularity, there are still some niches where Python is absent, or is rarely seen:</p>
+<ul>
+<li><p><strong>low-level programming</strong> (sometimes called “close to metal” programming): if you want to implement an extremely effective driver or graphical engine, you wouldn’t use Python.</p></li>
+<li><p><strong>applications for mobile devices</strong>: although this territory is still waiting to be conquered by Python, it will most likely happen someday.</p></li>
+</ul>
+</section>
+<section id="there-is-more-than-one-python" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="there-is-more-than-one-python"><span class="header-section-number">2.8</span> There is more than one Python</h2>
+<p><strong>Python 2 vs.&nbsp;Python 3</strong></p>
+<p>There are two main kinds of Python, called Python 2 and Python 3.</p>
+<p>Python 2 is an older version of the original Python. Its development has since been intentionally stalled, although that doesn’t mean that there are no updates to it. On the contrary, the updates are issued on a regular basis, but they are not intended to modify the language in any significant way. They rather fix any freshly discovered bugs and security holes. Python 2’s development path has reached a dead end already, but Python 2 itself is still very much alive.</p>
+<p><strong>Python 3 is the newer (or to be more precise, the current) version of the language. It’s going through its own evolutionary path, creating its own standards and habits.</strong></p>
+<p><img src="img01/1.05-python2vs3.png" class="img-fluid" width="401"></p>
+<p>These two versions of Python aren’t compatible with each other. Python 2 scripts won’t run in a Python 3 environment and vice versa, so if you want the old Python 2 code to be run by a Python 3 interpreter, the only possible solution is to rewrite it, not from scratch, of course, as large parts of the code may remain untouched, but you do have to revise all the code to find all possible incompatibilities. Unfortunately, this process cannot be fully automatized.</p>
+<p>It’s too hard, too time-consuming, too expensive, and too risky to migrate an old Python 2 application to a new platform, and it’s even possible that rewriting the code will introduce new bugs into it. It’s easier, and more sensible, to leave these systems alone and to improve the existing interpreter, instead of trying to work inside the already functioning source code.</p>
+<p>Python 3 isn’t just a better version of Python 2 – it is a completely different language, although it’s very similar to its predecessor. When you look at them from a distance, they appear to be the same, but when you look closely, though, you notice a lot of differences.</p>
+<p>If you’re modifying an old existing Python solution, then it’s highly likely that it was coded in Python 2. This is the reason why Python 2 is still in use. There are too many existing Python 2 applications to discard it altogether.</p>
+<p><strong>Note</strong></p>
+<p>If you’re going to start a new Python project, <strong>you should use Python 3, and this is the version of Python that will be used during this course.</strong></p>
+<p>It is important to remember that there may be smaller or bigger differences between subsequent Python 3 releases (e.g., Python 3.6 introduced ordered dictionary keys by default under the CPython implementation) – the good news, though, is that all the newer versions of Python 3 are <strong>backward compatible</strong> with the previous versions of Python 3. Whenever meaningful and important, we will always try to highlight those differences in the course.</p>
+<p>All the code samples you will find during the course have been tested against Python 3.4, Python 3.6, Python 3.7, Python 3.8, and Python 3.9.</p>
+</section>
+<section id="python-implementations" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="python-implementations"><span class="header-section-number">2.9</span> Python implementations</h2>
+<p>In addition to Python 2 and Python 3, there is more than one version of each.</p>
+<p>Following the <a href="https://wiki.python.org/moin/PythonImplementations">Python wiki page</a>, an <em>implementation</em> of Python refers to “a program or environment, which provides support for the execution of programs written in the Python language, as represented by the CPython reference implementation.”</p>
+<p>The <em>traditional</em> implementation of Python, called <strong>CPython</strong>, is Guido van Rossum’s reference version of the Python computing language, and it’s most often called just “Python”. When you hear the name <em>CPython</em>, it’s most probably used to distinguish it from other, non-traditional, alternative implementations.</p>
+<p>But, first things first. There are the Pythons which are maintained by the people gathered around the PSF (<a href="https://www.python.org/psf-landing/">Python Software Foundation</a>), a community that aims to develop, improve, expand, and popularize Python and its environment. The PSF’s president is Guido von Rossum himself, and for this reason, these Pythons are called <strong>canonical</strong>. They are also considered to be <strong>reference Pythons</strong>, as any other implementation of the language should follow all standards established by the PSF.</p>
+<p>Guido van Rossum used the “C” programming language to implement the very first version of his language and this decision is still in force. All Pythons coming from the PSF are written in the “C” language. There are many reasons for this approach. One of them (probably the most important) is that thanks to it, Python may be easily ported and migrated to all platforms with the ability to compile and run “C” language programs (virtually all platforms have this feature, which opens up many expansion opportunities for Python).</p>
+<p>This is why the PSF implementation is often referred to as <strong>CPython</strong>. This is the most influential Python among all the Pythons in the world.</p>
+<p>Let’s discuss some members of the Python family, and some of the most popular Python alternative implementations.</p>
+<section id="cython" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="cython"><span class="header-section-number">2.9.1</span> Cython</h3>
+<p><strong>Cython</strong> one of a possible number of solutions to the most painful of Python’s traits - the lack of efficiency. Large and complex mathematical calculations may be easily coded in Python (much easier than in “C” or any other traditional language), but the resulting code execution may be extremely time-consuming.</p>
+<p>How are these two contradictions reconciled? One solution is to write your mathematical ideas using Python, and when you’re absolutely sure that your code is correct and produces valid results, you can translate it into “C”. Certainly, “C” will run much faster than pure Python.</p>
+<p>This is what Cython is intended to do - to automatically translate the Python code (clean and clear, but not too swift) into “C” code (complicated and talkative, but agile).</p>
+<p><img src="img01/1.06-cython.png" class="img-fluid"></p>
+</section>
+<section id="jython" class="level3" data-number="2.9.2">
+<h3 data-number="2.9.2" class="anchored" data-anchor-id="jython"><span class="header-section-number">2.9.2</span> Jython</h3>
+<p>Another version of Python is called <strong>Jython</strong>. “J” is “Java”. Imagine a Python written in Java instead of C. This is useful, for example, if you develop large and complex systems written entirely in Java and want to add some Python flexibility to them. The traditional CPython may be difficult to integrate into such environment, as C and Java live in completely different worlds and don’t share many common ideas.</p>
+<p>Jython can communicate with existing Java infrastructure more effectively. This is why some projects find it useful and necessary.</p>
+<p>Note: the current Jython implementation follows Python 2 standards. There is no Jython conforming to Python 3 so far.</p>
+<p><img src="img01/1.07-jython.png" class="img-fluid"></p>
+</section>
+<section id="micropython" class="level3" data-number="2.9.3">
+<h3 data-number="2.9.3" class="anchored" data-anchor-id="micropython"><span class="header-section-number">2.9.3</span> MicroPython</h3>
+<p><strong>MicroPython</strong> is an efficient open source software implementation of Python 3 that is optimized to run on <strong>microcontrollers</strong>. It includes a small subset of the Python Standard Library, but it is largely packed with a large number of features such as interactive prompt or arbitrary precision integers, as well as modules that give the programmer access to low-level hardware.</p>
+<p>Originally created by Damien George, an Australian programmer, who in the year 2013 ran a successful campaign on Kickstarter, and released the first MicroPython version with an STM32F4-powered development board called <strong>pyboard</strong>.</p>
+<p>In 2017, MicroPython was used to create <strong>CircuitPython</strong>, another one open source programming language that runs on the microcontroller hardware, which is derivative of the MicroPython language.</p>
+<p><img src="img01/1.08-micropython.png" class="img-fluid"></p>
+</section>
+<section id="pypy" class="level3" data-number="2.9.4">
+<h3 data-number="2.9.4" class="anchored" data-anchor-id="pypy"><span class="header-section-number">2.9.4</span> PyPy</h3>
+<p>The <strong>PyPy</strong> logo is a rebus. Can you solve it? It means: a Python within a Python. In other words, it represents a Python environment written in Python-like language named <strong>RPython</strong> (Restricted Python). It is actually a subset of Python.</p>
+<p>The source code of PyPy is not run in the interpretation manner, but is instead translated into C programming language and then executed separately.</p>
+<p>This is useful because if you want to test any new feature that may be (but doesn’t have to) introduced into mainstream Python implementation, it’s easier to check it with PyPy than with CPython. This is why PyPy is rather a tool for people developing Python than for the rest of users. This doesn’t make Python any less important or less serious than CPython, of course.</p>
+<p>In addition, PyPy is compatible with the Python 3 language.</p>
+<p>There are many more different Pythons in the world. You’ll find them if you look, but <strong>this course will focus on CPython</strong>.</p>
+<p><img src="img01/1.09-pypy.png" class="img-fluid"></p>
+</section>
+</section>
+</section>
+<section id="downloading-and-installing-python" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Downloading and Installing Python</h1>
+<p>Welcome to section three, where we will talk about the ways of obtaining, installing, and configuring Python on your local computer.</p>
+<section id="how-to-get-python-and-how-to-get-to-use-it" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="how-to-get-python-and-how-to-get-to-use-it"><span class="header-section-number">3.1</span> How to get Python and how to get to use it</h2>
+<p>There are several ways to get your own copy of Python 3, depending on the operating system you use.</p>
+<p><strong>Linux users most probably have Python already installed</strong> - this is the most likely scenario, as Python’s infrastructure is intensively used by many Linux OS components.</p>
+<p>For example, some distributors may couple their specific tools together with the system and many of these tools, like package managers, are often written in Python. Some parts of graphical environments available in the Linux world may use Python, too.</p>
+<p>If you’re a Linux user, open the terminal/console, and type:</p>
+<pre><code>python3</code></pre>
+<p>at the shell prompt, press <em>Enter</em> and wait. If you see something like this:</p>
+<p><img src="img01/1.10.png" class="img-fluid"></p>
+<p>then you don’t have to do anything else.</p>
+<p>If Python 3 is absent, then refer to your Linux documentation in order to find out how to use your package manager to download and install a new package – the one you need is named <strong>python3</strong> or its name begins with that.</p>
+<p>All non-Linux users can download a copy at <a href="https://www.python.org/downloads/" class="uri">https://www.python.org/downloads/</a>.</p>
+</section>
+<section id="how-to-download-install-and-configure-python" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="how-to-download-install-and-configure-python"><span class="header-section-number">3.2</span> How to download, install, and configure Python</h2>
+<p>Because the browser tells the site you’ve entered the OS you use, the only step you have to take is to click the appropriate Python version you want.</p>
+<p>In this case, select Python 3. The site always offers you the latest version of it.</p>
+<p>If you’re a <strong>Windows user</strong>, start the downloaded .exe file and follow all the steps.</p>
+<p>Leave the default settings the installer suggests for now, with one exception - look at the checkbox named <strong>Add Python 3.x to PATH</strong> and check it.</p>
+<p>This will make things easier.</p>
+<p>If you’re a <strong>macOS user</strong>, a version of Python 2 may already have been preinstalled on your computer, but since we will be working with Python 3, you will still need to download and install the relevant .pkg file from the Python site.</p>
+</section>
+<section id="starting-your-work-with-python" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="starting-your-work-with-python"><span class="header-section-number">3.3</span> Starting your work with Python</h2>
+<p>Now that you have Python 3 installed, it’s time to check if it works and make the very first use of it.</p>
+<p>This will be a very simple procedure, but it should be enough to convince you that the Python environment is complete and functional.</p>
+<p>There are many ways of utilizing Python, especially if you’re going to be a Python developer.</p>
+<p>To start your work, you need the following tools:</p>
+<ul>
+<li><p>an <strong>editor</strong> which will support you in writing the code (it should have some special features, not available in simple tools); this dedicated editor will give you more than the standard OS equipment;</p></li>
+<li><p>a <strong>console</strong> in which you can launch your newly written code and stop it forcibly when it gets out of control;</p></li>
+<li><p>a tool named a <strong>debugger</strong>, able to launch your code step-by-step, which will allow you to inspect it at each moment of execution.</p></li>
+</ul>
+<p>Besides its many useful components, the Python 3 standard installation contains a very simple but extremely useful application named IDLE.</p>
+<p><strong>IDLE</strong> is an acronym: Integrated Development and Learning Environment.</p>
+<p>Navigate through your OS menus, find IDLE somewhere under Python 3.x and launch it. This is what you should see:</p>
+<p><img src="img01/1.11.png" class="img-fluid"></p>
+<p>Or you can type <code>idle</code> on the windows console, which will open the same window.</p>
+</section>
+<section id="your-very-first-program-before-your-first-program" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="your-very-first-program-before-your-first-program"><span class="header-section-number">3.4</span> Your very first program before your first program…</h2>
+<p>It is now time to write and run your first Python 3 program. It will be very simple, for now.</p>
+<p>The first step is to create a new source file and fill it with code. Click <em>File</em> in the IDLE menu and choose <em>New file</em>.</p>
+<p><img src="img01/1.12.png" class="img-fluid"></p>
+<p>As you can see, IDLE opens a new window for you. You can use it to write and amend your code.</p>
+<p>This is the <strong>editor window</strong>. Its only purpose is to be a workplace in which your source code is treated. Do not confuse the editor window with the shell window. They perform different functions.</p>
+<p>The editor window is currently untitled, but it’s good practice to start work by naming the source file.</p>
+<p>Click <em>File</em> (in the new window), then click <em>Save as…</em>, select a folder for the new file (the desktop is a good place for your first programming attempts) and chose a name for the new file.</p>
+<p>Note: don’t set any extension for the file name you are going to use. Python needs its files to have the <em>.py</em> extension, so you should rely on the dialog window’s defaults. Using the standard <em>.py</em> extension enables the OS to properly open these files.</p>
+<p>Now put just one line into your newly opened and named editor window. The line looks like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hisssssss..."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We’re not going to explain the meaning of the program right now. You’ll find a detailed discussion in the next chapter.</p>
+<p>Take a closer look at the quotation marks. These are the simplest form of quotation marks (neutral, straight, dumb, etc.) commonly used in source files. Do not try to use typographic quotes (curved, curly, smart, etc.), used by advanced text processors, as Python doesn’t accept them.</p>
+<p>Save the file (<em>File</em> -&gt; <em>Save</em>) and run the program (<em>Run</em> -&gt; <em>Run Module</em>).</p>
+<p>If everything goes okay and there are no mistakes in the code, the console window will show you the effects caused by running the program.</p>
+<p>In this case, the program <strong>hisses</strong>.</p>
+<p>Try to run it once again. And once more.</p>
+<p><img src="img01/1.13.png" class="img-fluid"></p>
+<p>Now close both windows now and return to the desktop.</p>
+</section>
+<section id="how-to-spoil-and-fix-your-code" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="how-to-spoil-and-fix-your-code"><span class="header-section-number">3.5</span> How to spoil and fix your code</h2>
+<p>Now start IDLE again.</p>
+<ul>
+<li><p>Click <em>File</em>, <em>Open</em>, point to the file you saved previously and let IDLE read it in.</p></li>
+<li><p>Try to run it again by pressing <em>F5</em> when the editor window is active.</p></li>
+</ul>
+<p>As you can see, IDLE is able to save your code and retrieve it when you need it again.</p>
+<p>IDLE contains one additional and helpful feature.</p>
+<ul>
+<li><p>First, remove the closing parenthesis.</p></li>
+<li><p>Then enter the parenthesis again.</p></li>
+</ul>
+<p>Every time you put the closing parenthesis in your program, IDLE will show the part of the text limited with a pair of corresponding parentheses by graying it out. This helps you to remember to <strong>place them in pairs</strong>.</p>
+<p><img src="img01/1.14.png" class="img-fluid"></p>
+<p>Remove the closing parenthesis again. The code becomes erroneous. It contains a syntax error now. IDLE should not let you run it.</p>
+<p>Try to run the program again. IDLE will remind you to save the modified file. Follow the instructions.</p>
+<p>Watch all the windows carefully.</p>
+<p>A new window appears – it says that the interpreter has encountered an EOF (<em>end-of-file</em>) although (in its opinion) the code should contain some more text.</p>
+<p>The editor window shows clearly <strong>where</strong> it happened.</p>
+<p><img src="img01/1.15.png" class="img-fluid"></p>
+<p>Fix the code now. It should look like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hisssssss..."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Run it to see if it “hisses” again.</p>
+<p>Let’s spoil the code one more time. Remove one letter from the word <code>print</code>. Run the code by pressing <em>F5</em>. What happens now? As you can see, Python is not able to recognize the instruction.</p>
+<p><img src="img01/1.16.PNG" class="img-fluid"></p>
+<p>You may have noticed that the error message generated for the previous error is quite different from the first one. This is because the nature of the error is <strong>different</strong> and the error is discovered at a <strong>different stage</strong> of interpretation.</p>
+<p>The editor window will not provide any useful information regarding the error, but the console windows might.</p>
+<p>The message (in red) shows (in the subsequent lines):</p>
+<ul>
+<li><p>the <strong>traceback</strong> (which is the path that the code traverses through different parts of the program – you can ignore it for now, as it is empty in such a simple code);</p></li>
+<li><p>the <strong>location of the error</strong> (the name of the file containing the error, line number and module name); note: the number may be misleading, as Python usually shows the place where it first notices the effects of the error, not necessarily the error itself;</p></li>
+<li><p>the <strong>content of the erroneous line</strong>; note: IDLE’s editor window doesn’t show line numbers, but it displays the current cursor location at the bottom-right corner; use it to locate the erroneous line in a long source code;</p></li>
+<li><p>the <strong>name of the error</strong> and a short explanation.</p></li>
+</ul>
+</section>
+</section>
+<section id="module-test" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Module test</h1>
+<ol type="1">
+<li><p><strong>What is machine code?</strong> A low level programming language consisting of binary digits/bits that the computer reads and understands.</p></li>
+<li><p><strong>What are the four fundamental elements that make a language?</strong> An alphabet, a lexis, a syntax and semantics.</p></li>
+<li><p><strong>What do you call a file containing a program written in a high-level programming language?</strong> A source file.</p></li>
+<li><p><strong>What is true about compilation?</strong> The code is converted directly into a machine code executable by the processor. It tends to be faster than interpretation.</p></li>
+<li><p><strong>What is the best definition of a <em>script</em>?</strong> It’s a text file that contains instructions which make up a Python program.</p></li>
+<li><p><strong>Two true statements.</strong> Python is a good choice for creating and executing tests for applications. Python is free, open-source, and multiplatform.</p></li>
+<li><p><strong>What is <em>CPython</em>?</strong> It’s the default, reference implementation of Python, written in the C language.</p></li>
+<li><p><strong>What do you call a command-line interpreter which lets you interact with your OS and execute Python commands and scripts?</strong> A console.</p></li>
+<li><p><strong>What is the expected behavior of the following program?</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The program will output <code>Hello!</code> to the screen.</p></li>
+<li><p><strong>What is the expected behavior of the following program?</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>prin(<span class="st">"Goodbye!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The program will generate an error message on the screen.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
